@@ -1,0 +1,72 @@
+repeat task.wait() until game:IsLoaded() --ต้องใส่ตลอดถ้าใช้ synx ไอควายจำใส่สมองเอาไว้
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+
+_G.KAITAN1CLICK = true
+
+_G.Fruit1 = {
+    ['BuyFruit'] = true, -- true / false
+    ['MainFruit'] = {
+        [1] = "Dough-Dough",
+        [2] = "Magma-Magma",
+    },
+    ['SelectDevil'] = {
+      [1] = "Dough-Dough",
+      [2] = "Magma-Magma",
+    },
+    ['SinperFruit_mode'] = true,
+}
+
+_G.Race1 = {
+    ['RaceSniper'] = true, -- true / false
+    ['Select_Want_Race'] = {"Human","Mink","Skypiea","Fishman"},  -- del race that u don't want
+}
+_G.RamSetting1 = {
+    ["Enable"] = true,
+    ["Delay"] = 300, -- 300 sec
+    ["Description"] = { 
+        [1] = "Level",
+        [2] = "Melee",
+        [3] = "Fruit",
+        [4] = "Race",
+        [5] = "World",
+        [6] = "Beli",
+        [7] = "Bounty/Honor",
+        [7] = "Fragment",
+        [8] = "Mirror",
+        [9] = "Valkyrie",
+        [10] = "CDK",
+        [11] = "Tushita",
+        [12] = "Soul Guitar",
+        [13] = "Scythe",
+    }
+}
+_G.Setting1 = {['WhiteScreen'] = true}
+
+
+-- (If you want to custom script config, put it in the code below)
+-- Replace you custom script config here / วางคอนฟิกสคริปต์ที่ต้องการตรงนี้
+
+task.spawn(function()
+    local errorProtect = tick()
+    repeat task.wait() until _G.isTablehubLoaded == true or tick() - errorProtect > 60
+    if tick() - errorProtect > 60 then
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer, game.JobId)
+    end
+    -- (If you want to run your script after tablehub, put it in the code above)
+    -- Replace your external script here / วางสคริปต์ที่ต้องการให้รันหลัง tablehub ตรงนี้ 
+end);
+
+(function()
+    _G.isTablehubLoaded = false
+    _G.Key = "Table-1ZZC-XXXX-XXXX-4NCJ"
+    _G.DiscordId = "00000000000000000"
+
+    local request = (syn) and syn.request or (pebc_execute or XPROTECT) and http_request or (SENTINEL_V2 or KRNL_LOADED) and request
+    local err, script;
+    repeat
+        task.wait()
+        err, script = pcall(request, { Url = "https://www.tablehub.net/api/v3/script/" .. game.gameId})
+    until err == true and script ~= nil
+    loadstring(script.Body)()
+end)();
